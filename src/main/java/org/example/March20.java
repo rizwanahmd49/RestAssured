@@ -1,7 +1,8 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class March20 {
 
@@ -60,34 +61,52 @@ public class March20 {
     }
 
 
-    public static void main(String[] args) {
-
-        findDuplicateCharacters("rizwanahmadsalmani");
-    }
-
-    private static void findDuplicateCharacters(String string) {
-        System.out.println("Provided String is: " + string);
-        string = string.replaceAll("[^0-9]]", "");
-        System.out.println("After removing all special characters is" + string);
-        String fu = "";
-        int count = 0;
-        char[] charArray = string.toLowerCase().toCharArray();
-        int size = charArray.length - 1;
-        for (int i = 0; i <= size; i++) {
-            count=0;
-            for (int j = 0; j <= size; j++) {
-                if (charArray[i] == charArray[j]) {
-                    count += 1;
-                }
-            }
-
-            System.out.print(charArray[i] + " => ");
-            System.out.print(count+"\n");
-
+    private static void findSecondHighestNumber(int[] intArray) {
+        int high = Integer.MIN_VALUE;
+        int secondHigh = Integer.MIN_VALUE;
+        int length = intArray.length;
+        for (int i = 0; i < length; i++) {
+            if (intArray[i] > high) {
+                secondHigh = high;
+                high = intArray[i];
+            } else if (intArray[i] > secondHigh && intArray[i] < high)
+                secondHigh = intArray[i];
 
         }
+        System.out.println("Second High: " + secondHigh);
+    }
+
+
+
+    private static void findDuplicateChar(String string) {
+        System.out.println("Provided String : " + string);
+        string=string.replaceAll(" ","");
+        System.out.println("removed space from String");
+        Map <Character,Integer>map=new HashMap<>();
+        char[] charArray = string.toCharArray();
+        Map<Character, Long> data = new String(charArray)
+                .chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        for (Map.Entry<Character, Long> mp:data.entrySet())
+            System.out.println(mp.getKey()+" => "+mp.getValue());
+
+
+
 
     }
 
+    public static void main(String[] args) {
+        String fname="rizwan";
+        fname=fname+"ahmad";
+        String firstName="rizwanahmad";
+        if (firstName==fname)
+            System.out.println("Both name are equals");
+        else
+            System.out.println("Name are not equals");
+        if (firstName.equals(fname))
+            System.out.println("Name is equals");
+        findDuplicateChar("rizwan5642ahmad4568salmani");
+    }
 
 }
