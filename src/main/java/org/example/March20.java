@@ -107,6 +107,7 @@ public class March20 {
         if (firstName.equals(fname))
             System.out.println("Name is equals");
         findDuplicateChar("rizwan5642ahmad4568salmani");
+        findSecondHighestNumber(new int[]{10,20,35,62,35,85,99});
     }
 
 }
